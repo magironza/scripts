@@ -1,1 +1,12 @@
- 5/U9         150    1       0       0        0       0        0    0% FERIAS_VTL1                    
+15:35:087/U5         132    6       0       0        0       0        0    0% CENTRO_PPAL
+
+15:35:087/U6         132    6       0       0        0       0        0    0% CENTRO_VTL1
+
+15:35:087/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
+
+        0       1       73    0% BELLAVISTA_PPAL                
+
+
+09:21:12 7/U9         131    4      84       0        0       0       84    0% BELLAVISTA_VTL1                
+
+

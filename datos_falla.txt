@@ -1,1 +1,1 @@
-no hay nodos alarmados
+7/U5         132    6       0       0        0       0        0    0% CENTRO_PPAL7/U6         132    6       0       0        0       0        0    0% CENTRO_VTL17/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
