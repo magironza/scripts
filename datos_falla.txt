@@ -1,1 +1,1 @@
-7/U5         132    6       0       0        0       0        0    0% CENTRO_PPAL7/U6         132    6       0       0        0       0        0    0% CENTRO_VTL17/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
+2/U3         151    3      36       0        0       0       36    0% LA_ALDEA_PPAL2/U11        151    3      26       0        0       0       26    0% LA_ALDEA_VTL1

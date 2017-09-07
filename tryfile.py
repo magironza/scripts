@@ -16,7 +16,7 @@ conexion.connect(username = ssh_usuario, password = ssh_clave)
 canal = conexion.open_session()
 canal.exec_command(comando)
 salida = canal.makefile('rb', -1).readlines()
-doc_falla = open(path+'/datos_falla.txt', 'w')
+doc_falla = open(path+'/datos_falla.txt', 'r+')
 datos_ssh = open(path+'/datos_all.txt', 'w')
 #graficos = open(path+'/graficos.txt', 'a')
 
@@ -39,20 +39,19 @@ def leer_archivo(archivo):
 	return contenido
 
 def escribir_archivo(archivo, texto):
-	archivo.write('\r\n' + texto)
+	archivo.write('\r'+texto+ '\n')
 
 def envio_correo(falla):
 	if falla:
 		cont = 1
 		while cont == 1:
-			ejecutar = commands.getoutput("python /mnt/c/Users/Emtel\ Sa\ Esp/scripts/correo2.py 1> /dev/null 2> /mnt/c/Users/Emtel\ Sa\ Esp/scripts/ficheros/fic.log")
+			commands.getoutput("python /mnt/c/Users/Emtel\ Sa\ Esp/scripts/trycorreo.py 1> /dev/null 2> /mnt/c/Users/Emtel\ Sa\ Esp/scripts/ficheros/fic.log")
 			cont += 2
 	else:
-		doc_falla.write("no hay nodos alarmados")
-		print "todo ok"
-		doc_falla.close
+		print "Todo esta ok"
 
 arch = establece_archivo(path+"/datos.txt", "r+")
+
 
 for linea in salida:
 
@@ -63,13 +62,13 @@ for linea in salida:
 
 		if len(linea.split()) == 10:
 			interfaz, dato2, dato3, total_usuario, habiles, dato6, dato7, off_usuarios, porcentaje, nodo = linea.split()
-		
-			#exepcion = linea.find("JARDINE")
-			#ex2 = linea.find("ALDEA")
-			#ex3 = linea.find("EMPEDRADO")
-			#print exepcion, off_usuarios
-			#print exepcion
-			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0:# and ex2 == -1 and ex3 == -1:
+		#interface = linea[0:2]
+		#datoint = int(interface)
+		#porcentaje = linea[65:69]
+		#dato2 = int(porcentaje)
+		#exepcion = linea.find("ANTONIA")
+		#print exepcion
+			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0:
 				doc_falla.write(linea)
 				escribir_archivo(arch, hora + linea + '\r\n')
 				datos_nodo_alarmado.append(linea)

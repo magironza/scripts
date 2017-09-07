@@ -1,8 +1,8 @@
-15:35:087/U5         132    6       0       0        0       0        0    0% CENTRO_PPAL
 
-15:35:087/U6         132    6       0       0        0       0        0    0% CENTRO_VTL1
+08:48:522/U3         151    3      36       0        0       0       36    0% LA_ALDEA_PPAL
 
-15:35:087/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
+08:48:522/U11        151    3      26       0        0       0       26    0% LA_ALDEA_VTL1
+35:087/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
 
         0       1       73    0% BELLAVISTA_PPAL                
 
