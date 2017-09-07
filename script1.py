@@ -66,10 +66,10 @@ for linea in salida:
 		
 			#exepcion = linea.find("JARDINE")
 			#ex2 = linea.find("ALDEA")
-			#ex3 = linea.find("EMPEDRADO")
+			ex3 = linea.find("EMPEDRADO")
 			#print exepcion, off_usuarios
 			#print exepcion
-			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0:# and ex2 == -1 and ex3 == -1:
+			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0 and ex3 == -1:# and ex2 == -1:
 				doc_falla.write(linea)
 				escribir_archivo(arch, hora + linea + '\r\n')
 				datos_nodo_alarmado.append(linea)

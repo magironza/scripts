@@ -157,7 +157,8 @@ def reset_parameters(dslam, tarjeta, puerto):
 			channel.send("shutdown")
 			channel.send("\n")
 			channel.send("exit\n")
-
+		out = channel.recv(9999)
+		print(out.decode("ascii"))
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
 	ssh.close()

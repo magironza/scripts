@@ -27,6 +27,11 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 #ssh.connect(host, username=user, password=psw, port=22)
 ssh.connect(ssh_servidor, username=ssh_usuario, password=ssh_clave)
+print "1 - ATM Centro \n"
+print "2 - ATM Santa Clara\n"
+print("3 - ATM La Paz")
+see = input("Escribe 1, 2 o 3: ")
+
 tarjeta = input("Numero de tarjeta: ")
 puerto = input("Numero del puerto: ")
 #print type(dslam), dslam, type(tarjeta), tarjeta
@@ -42,13 +47,43 @@ pass1 = "3mt3l2016%"
 channel.send(user1 + "\n")
 channel.send(pass1 + "\n")
 time.sleep(2)
-channel.send('telnet 192.168.30.11\n')
+channel.send('telnet 192.168.40.10\n')
 channel.send("\n")
 time.sleep(3)
-user2 = "zte"
-pass2 = "zte"
+user2 = "admin"
+pass2 = "ngnt64g"
 channel.send(user2 + "\n")
 channel.send(pass2 + "\n")
+time.sleep(2)
+channel.send('telnet 192.168.1.180\n')
+channel.send("\n")
+time.sleep(3)
+user2 = "lmendez"
+pass2 = "rmmcore03"
+channel.send
+channel.send(user2 + "\n")
+channel.send(pass2 + "\n")
+time.sleep(2)
+user3 = "jlopez"
+if see == 2:
+	atm = "staclara"
+	pass3 = "123456"
+else:
+	pass3 = "1234"
+	if see == 1:
+		atm = "centro"
+	else:
+		atm = "lapaz"
+channel.send(atm)
+channel.send("\n")
+time.sleep(1)
+channel.send(user3 + "\n")
+channel.send(pass3 + "\n")
+time.sleep(2)
+channel.send("en")
+channel.send("\n")
+channel.send(atm + "$$$07")
+channel.send("\n")
 time.sleep(2)
 out = channel.recv(9999)
 print(out.decode("ascii"))
@@ -58,16 +93,20 @@ while opcion != 9:
 	print "2 - Ver cuanto soporta puerto\n"
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
-		channel.send("show run int adsl_1/" + str(tarjeta)+"/"+str(puerto))
+		channel.send("show running-config interface atM " + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
 	else: 
-		channel.send("show adsl port-status adsl_1/" + str(tarjeta)+"/"+str(puerto) +" local entire")
+		channel.send("show interface atM " + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
 	time.sleep(3)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
 	opcion = input("Desea salir? (9-s)")
 
+time.sleep(1)
+channel.send("exit\n")
+time.sleep(1)
+channel.send("exit\n")
 time.sleep(1)
 channel.send("exit\n")
 time.sleep(1)
