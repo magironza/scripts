@@ -58,11 +58,16 @@ def conexion_dslam2(dslam_numero):
 def verificar_parametros1(tarjeta, puerto):
 	print "1 - Ver la configuracion \n"
 	print "2 - Ver cuanto soporta puerto\n"
-	see = input("Escribe 1 o 2: ")
+	print "3 - Ver la tarjeta \n"
+
+	see = input("Escribe 1, 2 o 3: ")
 	if see == 1:
 		channel.send("show run int adsl_0/" + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
-	else: 
+	elif see == 3:
+		channel.send("show adsl port-status adsl_0/" + str(tarjeta)+"/1-10")
+		channel.send("\n")
+	else:
 		channel.send("show adsl port-status adsl_0/" + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
 
@@ -74,6 +79,7 @@ def verificar_parametros1(tarjeta, puerto):
 def verificar_parametros2(tarjeta, puerto):
 	print "1 - Ver la interfaz \n"
 	print "2 - Ver la tarjeta \n"
+
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
 		channel.send("show adsl status interface " + str(tarjeta)+"/"+str(puerto))

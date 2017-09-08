@@ -88,7 +88,7 @@ time.sleep(2)
 out = channel.recv(9999)
 print(out.decode("ascii"))
 
-while opcion != 9:
+def verificar_parametros(tarjeta, puerto):
 	print "1 - Ver la configuracion \n"
 	print "2 - Ver cuanto soporta puerto\n"
 	see = input("Escribe 1 o 2: ")
@@ -101,6 +101,31 @@ while opcion != 9:
 	time.sleep(3)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
+	return
+
+def reset(tarjeta, puerto):
+	test = input("Reset?: (1-y/2-n) ")
+	if test == 1:
+		channel.send("conf t")
+		channel.send("\n")
+		channel.send("interface atM " + str(tarjeta)+"/"+str(puerto))
+		channel.send("\n")
+		channel.send("shutdown")
+		channel.send("\n")
+		time.sleep(2)
+		channel.send("no shutdown\n")
+		time.sleep(2)
+		channel.send("end\n")
+		out = channel.recv(9999)
+		print(out.decode("ascii"))
+	else:
+		print("Thanks for coming")
+	return
+
+while opcion != 9:
+	verificar_parametros(tarjeta, puerto)
+	reset(tarjeta, puerto)
+
 	opcion = input("Desea salir? (9-s)")
 
 time.sleep(1)
