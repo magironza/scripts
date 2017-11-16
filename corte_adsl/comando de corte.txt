@@ -1,0 +1,1 @@
+update radusergroup set groupname="daloRADIUS-Disabled-Users" where username="corte";

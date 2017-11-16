@@ -64,12 +64,14 @@ for linea in salida:
 		if len(linea.split()) == 10:
 			interfaz, dato2, dato3, total_usuario, habiles, dato6, dato7, off_usuarios, porcentaje, nodo = linea.split()
 		
-			#exepcion = linea.find("JARDINE")
-			#ex2 = linea.find("ALDEA")
-			#ex3 = linea.find("EMPEDRADO")
+			
+			ex2 = linea.find("CIUDAD")
+			ex3 = linea.find("JULUMITO")
+			#ex4 = linea.find("CABUYERA")
+			#ex5 = linea.find("JULUMITO")
 			#print exepcion, off_usuarios
 			#print exepcion
-			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0:# and ex3 == -1:# and ex2 == -1:
+			if int(porcentaje[0:-1]) < 30 and int(interfaz[0:1]) < 8 and int(off_usuarios[0:2]) != 0 and ex3 == -1 and ex2 == -1:# and ex4 == -1 and ex5 == -1:
 				doc_falla.write(linea)
 				escribir_archivo(arch, hora + linea + '\r\n')
 				datos_nodo_alarmado.append(linea)

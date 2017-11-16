@@ -28,7 +28,7 @@ puerto = input("Numero del puerto: ")
 channel = ssh.invoke_shell()
 
 
-def conexion_dslam1(dslam_numero):
+def conexion_dslam1(dslam_numero, tarjeta, puerto):
 	
 	channel.send('telnet 172.16.1.' + str(dslam_numero) + "\n")
 	time.sleep(2)
@@ -40,8 +40,22 @@ def conexion_dslam1(dslam_numero):
 	time.sleep(2)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
+	print "1 - Ver la configuracion \n"
+	print "2 - Ver cuanto soporta puerto\n"
+	see = input("Escribe 1 o 2: ")
+	if see == 1:
+		channel.send("show run int adsl_0/" + str(tarjeta)+"/"+str(puerto))
+		channel.send("\n")
+	else: 
+		channel.send("show adsl port-status adsl_0/" + str(tarjeta)+"/"+str(puerto))
+		channel.send("\n")
 
-def conexion_dslam2(dslam_numero):
+	time.sleep(3)
+	out = channel.recv(9999)
+	print(out.decode("ascii"))
+
+
+def conexion_dslam2(dslam_numero, tarjeta, puerto):
 	channel.send('telnet 172.16.1.'+ str(dslam_numero))
 	channel.send("\n")
 	time.sleep(2)
@@ -53,33 +67,8 @@ def conexion_dslam2(dslam_numero):
 	time.sleep(2)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
-	
-
-def verificar_parametros1(tarjeta, puerto):
-	print "1 - Ver la configuracion \n"
-	print "2 - Ver cuanto soporta puerto\n"
-	print "3 - Ver la tarjeta \n"
-
-	see = input("Escribe 1, 2 o 3: ")
-	if see == 1:
-		channel.send("show run int adsl_0/" + str(tarjeta)+"/"+str(puerto))
-		channel.send("\n")
-	elif see == 3:
-		channel.send("show adsl port-status adsl_0/" + str(tarjeta)+"/1-10")
-		channel.send("\n")
-	else:
-		channel.send("show adsl port-status adsl_0/" + str(tarjeta)+"/"+str(puerto))
-		channel.send("\n")
-
-	time.sleep(3)
-	out = channel.recv(9999)
-	print(out.decode("ascii"))
-	return
-
-def verificar_parametros2(tarjeta, puerto):
 	print "1 - Ver la interfaz \n"
 	print "2 - Ver la tarjeta \n"
-
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
 		channel.send("show adsl status interface " + str(tarjeta)+"/"+str(puerto))
@@ -91,53 +80,32 @@ def verificar_parametros2(tarjeta, puerto):
 		channel.send("\n")
 		channel.send("p")
 		channel.send("\n")
-	time.sleep(10)
+	time.sleep(3)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
-	return
+	#print "Deseas resetear el puerto: "
+	#reset = input("1- y/ 2- n")
+	#if reset == 1:
+	#	channel.send("conf interface adsl-mpvc" + str(tarjeta)+"/"+str(puerto))
+	#	channel.send("\n")
+	#else:
+	#	channel.send("log\n")
+	#time.sleep(10)
+	out = channel.recv(9999)
+	print(out.decode("ascii"))
 
-if dslam == 33 or dslam == 87:
-	conexion_dslam2(dslam)
-else:
-	conexion_dslam1(dslam)
-
-def reset_parameters1(tarjeta, puerto):
-	test = input("Reset?: (1-y/2-n) - 3-cortar ")
-	if test == 1:
-		channel.send("conf t")
-		channel.send("\n")
-		channel.send("interface adsl_0/" + str(tarjeta)+"/"+str(puerto))
-		channel.send("\n")
-		channel.send("shutdown")
-		channel.send("\n")
-		time.sleep(2)
-		channel.send("no shutdown\n")
-		time.sleep(2)
-		channel.send("end\n")
-		out = channel.recv(9999)
-		print(out.decode("ascii"))
-	elif test == 3:
-		channel.send("conf t")
-		channel.send("\n")
-		channel.send("interface adsl_0/" + str(tarjeta)+"/"+str(puerto))
-		channel.send("\n")
-		channel.send("shutdown")
-		channel.send("\n")
-		time.sleep(2)
-		channel.send("end\n")
-		out = channel.recv(9999)
-		print(out.decode("ascii"))
-		print("servicio cortado")
-
+while opcion != 9:
+	if dslam == 33 or dslam == 87:
+		conexion_dslam2(dslam, tarjeta, puerto)
 	else:
-		print("Thanks for coming")
-	return
-	
+		conexion_dslam1(dslam, tarjeta, puerto)
 
-def reset_parameters2(tarjeta, puerto):
-	test = input("Reset?: (1-y/2-n) - 3-cortar ")
-	if test == 1:
-		channel.send(" conf interface adsl-mpvc " + str(tarjeta)+"/"+str(puerto))
+	test = input("Reset?: (1-y/2-n) ")
+	opcion = input("Desea salir (s-9)")
+
+def reset_parameters(dslam, tarjeta, puerto):
+	if dslam == 87 or dslam == 33:
+		channel.send("conf interface adsl-mpvc " + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
 		channel.send("shutdown")
 		channel.send("\n")
@@ -148,45 +116,43 @@ def reset_parameters2(tarjeta, puerto):
 		out = channel.recv(9999)
 		print(out.decode("ascii"))
 		channel.send("end\n")
-	elif test == 3:
-		channel.send(" conf interface adsl-mpvc " + str(tarjeta)+"/"+str(puerto))
+	else:
+		channel.send("conf t")
+		channel.send("\n")
+		channel.send("interface adsl_0/" + str(tarjeta)+"/"+str(puerto))
 		channel.send("\n")
 		channel.send("shutdown")
 		channel.send("\n")
 		time.sleep(2)
+		channel.send("no shutdown")
+		time.sleep(2)
 		out = channel.recv(9999)
 		print(out.decode("ascii"))
 		channel.send("end\n")
-		print("servicio cortado")
 
+	if test == 1:
+		reset_parameters(dslam, tarjeta, puerto)
 	else:
 		print("Thanks for coming")
-
-	return
-	
-
-while opcion != 9:
-	if dslam == 33 or dslam == 87:
-		#conexion_dslam2(dslam, tarjeta, puerto)
-		verificar_parametros2(tarjeta, puerto)
-		reset_parameters2(tarjeta, puerto)
-	else:
-		#conexion_dslam1(dslam, tarjeta, puerto)
-		verificar_parametros1(tarjeta, puerto)
-		reset_parameters1(tarjeta, puerto)
-
-	#print opcion
-
-	opcion = input("Desea salir (s-9):")
-
-if opcion == 9:
-	if dslam == 87 or dslam == 33:
-		channel.send("end\n")
-		channel.send("log\n")
-	else:
-		channel.send("end\n")
-		channel.send("exit\n")
-	#print(opcion)
+		if dslam == 87 or dslam == 33:
+			channel.send("conf t\n")
+			channel.send("conf interface adsl-mpvc " + str(tarjeta)+"/"+str(puerto))
+			channel.send("\n")
+			channel.send("no shutdown")
+			channel.send("\n")
+			channel.send("end\n")
+			time.sleep(2)
+			channel.send("log\n")
+		else:
+			channel.send("conf t")
+			channel.send("\n")
+			channel.send("interface adsl_0/" + str(tarjeta)+"/"+str(puerto))
+			channel.send("\n")
+			channel.send("shutdown")
+			channel.send("\n")
+			channel.send("exit\n")
+		out = channel.recv(9999)
+		print(out.decode("ascii"))
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
-ssh.close()
+	ssh.close()

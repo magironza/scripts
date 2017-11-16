@@ -104,7 +104,7 @@ def verificar_parametros(tarjeta, puerto):
 	return
 
 def reset(tarjeta, puerto):
-	test = input("Reset?: (1-y/2-n) ")
+	test = input("Reset?: (1-y/2-n) - 3-cortar ")
 	if test == 1:
 		channel.send("conf t")
 		channel.send("\n")
@@ -118,6 +118,19 @@ def reset(tarjeta, puerto):
 		channel.send("end\n")
 		out = channel.recv(9999)
 		print(out.decode("ascii"))
+	elif test == 3: 
+		channel.send("conf t")
+		channel.send("\n")
+		channel.send("interface atM " + str(tarjeta)+"/"+str(puerto))
+		channel.send("\n")
+		channel.send("shutdown")
+		channel.send("\n")
+		time.sleep(2)
+		channel.send("end\n")
+		out = channel.recv(9999)
+		print(out.decode("ascii"))
+		print "servicio cortado"
+
 	else:
 		print("Thanks for coming")
 	return

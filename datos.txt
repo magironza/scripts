@@ -1,7 +1,6 @@
 
-08:48:522/U3         151    3      36       0        0       0       36    0% LA_ALDEA_PPAL
-
-08:48:522/U11        151    3      26       0        0       0       26    0% LA_ALDEA_VTL1
+10:35:435/U0         143    0     161      21        0      23      117   13% VILLA_DEL_NORTE_PPAL
+:522/U11        151    3      26       0        0       0       26    0% LA_ALDEA_VTL1
 35:087/U7         132    6       0       0        0       0        0    0% CENTRO_VTL2
 
         0       1       73    0% BELLAVISTA_PPAL                
