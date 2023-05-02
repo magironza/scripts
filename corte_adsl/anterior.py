@@ -24,7 +24,7 @@ for i in lista2:
 		if ex3 > 0:
 			final.append(j)
 			#print j
-print path + "----> Ok la comparacion"
+print(path + "----> Ok la comparacion")
 
    
 open("iguales.txt", "a").write("\r\n".join(("".join(item)) for item in final))
