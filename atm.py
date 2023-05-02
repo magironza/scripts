@@ -5,9 +5,9 @@ import time
 import os
 from paramiko import SSHClient, AutoAddPolicy
 
-ssh_servidor = '190.5.200.10'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 22 
 opcion = 0
 #comando      = "telnet  "  + telnet_servidor
@@ -27,8 +27,8 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 #ssh.connect(host, username=user, password=psw, port=22)
 ssh.connect(ssh_servidor, username=ssh_usuario, password=ssh_clave)
-print "1 - ATM Centro \n"
-print "2 - ATM Santa Clara\n"
+print("1 - ATM Centro \n")
+print("2 - ATM Santa Clara\n")
 print("3 - ATM La Paz")
 see = input("Escribe 1, 2 o 3: ")
 
@@ -89,8 +89,8 @@ out = channel.recv(9999)
 print(out.decode("ascii"))
 
 def verificar_parametros(tarjeta, puerto):
-	print "1 - Ver la configuracion \n"
-	print "2 - Ver cuanto soporta puerto\n"
+	print("1 - Ver la configuracion \n")
+	print("2 - Ver cuanto soporta puerto\n")
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
 		channel.send("show running-config interface atM " + str(tarjeta)+"/"+str(puerto))
@@ -129,7 +129,7 @@ def reset(tarjeta, puerto):
 		channel.send("end\n")
 		out = channel.recv(9999)
 		print(out.decode("ascii"))
-		print "servicio cortado"
+		print("servicio cortado")
 
 	else:
 		print("Thanks for coming")

@@ -4,9 +4,9 @@ import os
 import subprocess
 import commands
 
-ssh_servidor = '10.50.0.50'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 36835 
 comando      = 'show cable modem summary'
 conexion = paramiko.Transport((ssh_servidor, ssh_puerto))
@@ -40,9 +40,9 @@ for linea in salida:
 envio_correo(falla)			
 archivo.close()
 if salida:
-	print "ok"
+	print("ok")
 else:
-	print canal.makefile_stderr('rb', -1).readlines()
+	print(canal.makefile_stderr('rb', -1).readlines())
 
 
 conexion.close()

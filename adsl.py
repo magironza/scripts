@@ -5,9 +5,9 @@ import time
 import os
 from paramiko import SSHClient, AutoAddPolicy
 
-ssh_servidor = '190.5.200.10'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasea'
 ssh_puerto   = 22 
 opcion = 0
 path = os.getcwd()
@@ -40,8 +40,8 @@ def conexion_dslam1(dslam_numero, tarjeta, puerto):
 	time.sleep(2)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
-	print "1 - Ver la configuracion \n"
-	print "2 - Ver cuanto soporta puerto\n"
+	print("1 - Ver la configuracion \n")
+	print("2 - Ver cuanto soporta puerto\n")
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
 		channel.send("show run int adsl_0/" + str(tarjeta)+"/"+str(puerto))
@@ -67,8 +67,8 @@ def conexion_dslam2(dslam_numero, tarjeta, puerto):
 	time.sleep(2)
 	out = channel.recv(9999)
 	print(out.decode("ascii"))
-	print "1 - Ver la interfaz \n"
-	print "2 - Ver la tarjeta \n"
+	print("1 - Ver la interfaz \n")
+	print("2 - Ver la tarjeta \n")
 	see = input("Escribe 1 o 2: ")
 	if see == 1:
 		channel.send("show adsl status interface " + str(tarjeta)+"/"+str(puerto))

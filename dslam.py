@@ -5,9 +5,9 @@ import time
 import os
 from paramiko import SSHClient, AutoAddPolicy
 
-ssh_servidor = '190.5.200.10'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 22 
 opcion = 0
 path = os.getcwd()
@@ -56,9 +56,9 @@ def conexion_dslam2(dslam_numero):
 	
 
 def verificar_parametros1(tarjeta, puerto):
-	print "1 - Ver la configuracion \n"
-	print "2 - Ver cuanto soporta puerto\n"
-	print "3 - Ver la tarjeta \n"
+	print("1 - Ver la configuracion \n")
+	print("2 - Ver cuanto soporta puerto\n")
+	print("3 - Ver la tarjeta \n")
 
 	see = input("Escribe 1, 2 o 3: ")
 	if see == 1:
@@ -77,8 +77,8 @@ def verificar_parametros1(tarjeta, puerto):
 	return
 
 def verificar_parametros2(tarjeta, puerto):
-	print "1 - Ver la interfaz \n"
-	print "2 - Ver la tarjeta \n"
+	print("1 - Ver la interfaz \n")
+	print("2 - Ver la tarjeta \n")
 
 	see = input("Escribe 1 o 2: ")
 	if see == 1:

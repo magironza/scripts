@@ -5,9 +5,9 @@ import time
 import os
 from paramiko import SSHClient, AutoAddPolicy
 
-ssh_servidor = '190.5.195.20'
-ssh_usuario  = 'root'
-ssh_clave    = '3mt3l2017*'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'constrasena'
 ssh_puerto   = 36835
 path = os.getcwd()
 

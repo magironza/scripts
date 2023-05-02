@@ -4,9 +4,9 @@ import commands
 import time
 import os
 
-ssh_servidor = '190.5.200.10'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 22 
 comando      = "telnet 172.16.1.21"
 path = os.getcwd()
@@ -26,8 +26,8 @@ salida = canal.makefile('rb', -1).readlines()
 
 if salida:
 	for linea in salida:
-		print linea
+		print(linea)
 else:
-	print canal.makefile_stderr('rb', -1).readlines()
+	print(canal.makefile_stderr('rb', -1).readlines())
 
 conexion.close()

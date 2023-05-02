@@ -4,9 +4,9 @@ import commands
 import time
 import os
 
-ssh_servidor = '10.50.0.50'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 36835 
 comando      = 'show cable modem summary'
 path = os.getcwd()
@@ -48,7 +48,7 @@ def envio_correo(falla):
 			commands.getoutput("python /mnt/c/Users/Emtel\ Sa\ Esp/scripts/trycorreo.py 1> /dev/null 2> /mnt/c/Users/Emtel\ Sa\ Esp/scripts/ficheros/fic.log")
 			cont += 2
 	else:
-		print "Todo esta ok"
+		print("Todo esta ok")
 
 arch = establece_archivo(path+"/datos.txt", "r+")
 
@@ -81,9 +81,9 @@ datos_ssh.write('\r\n')
 datos_ssh.close()		
 doc_falla.close()
 if salida:
-	print "ok"
+	print("ok")
 else:
-	print canal.makefile_stderr('rb', -1).readlines()
+	print(canal.makefile_stderr('rb', -1).readlines())
 
 arch.seek(0)
 conexion.close()

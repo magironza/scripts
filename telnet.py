@@ -3,9 +3,9 @@ import getpass
 import sys
 import telnetlib
 
-HOST = "172.16.1.21"
-user = "admemtel"
-password = "3mt3l2016#"
+HOST = "127.1.1.1"
+user = "usuario"
+password = "contrasena"
 
 tn = telnetlib.Telnet(HOST)
 
@@ -17,4 +17,4 @@ tn.write(password + "\n")
 tn.write("show running-config interface adsl_0/2/1 1> /dev/null 2> /mnt/c/Users/Emtel\ Sa\ Esp/scripts/ficheros/ficherotelnet.log")
 tn.write("exit\n")
 
-print tn.read_all()
+print(tn.read_all())

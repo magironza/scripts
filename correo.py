@@ -18,7 +18,7 @@ for nodo in lectura:
 	palabra.append(nodo[65:80])
 
 alarmados = " ".join(palabra)
-print alarmados
+print(alarmados)
 hora = time.strftime("%H:%M:%S")
 fecha = time.strftime("%d/%m/%y")
 
