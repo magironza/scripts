@@ -21,6 +21,6 @@ for i in lista2:
 		if ex3 > 0:
 			final.append(j)
 			#print j
-print path
+print(path)
 
 open("existe.txt", "w").write("\r\n".join(("".join(item)) for item in final))

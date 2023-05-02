@@ -7,9 +7,9 @@ from paramiko import SSHClient, AutoAddPolicy
 
 cortar = open('pruebacorte.txt', 'r')
 
-ssh_servidor = '10.20.0.26'
-ssh_usuario  = 'root'
-ssh_clave    = '4dmr4d1us3mt3l'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 22
 path = os.getcwd()
 

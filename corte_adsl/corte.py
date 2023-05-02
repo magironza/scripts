@@ -5,9 +5,9 @@ import time
 import os
 from paramiko import SSHClient, AutoAddPolicy
 
-ssh_servidor = '190.5.200.10'
-ssh_usuario  = 'plantainterna'
-ssh_clave    = '3mt3l#2015'
+ssh_servidor = '127.1.1.1'
+ssh_usuario  = 'usuario'
+ssh_clave    = 'contrasena'
 ssh_puerto   = 22 
 comando      = 'show users'
 path = os.getcwd()
@@ -18,7 +18,7 @@ canal = conexion.open_session()
 canal.exec_command(comando)
 salida = canal.makefile('rb', -1).readlines()
 #datos_ssh = open(path+'/listado.txt', 'w')
-print path
+print(path)
 
 datos_nodo_alarmado = [ ]
 
@@ -46,9 +46,9 @@ for linea in salida:
 		
 
 if salida:
-	print "ok"
+	print("ok")
 else:
-	print canal.makefile_stderr('rb', -1).readlines()
+	print(canal.makefile_stderr('rb', -1).readlines())
 
 arch.seek(0)
 conexion.close()
